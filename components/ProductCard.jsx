@@ -9,15 +9,15 @@ function ProductCard({ product, addToCart }) {
         transition: "0.4s",
         cursor: "pointer",
       }}
-      onMouseEnter={(e) =>
-        (e.currentTarget.style.transform = "translateY(-8px)")
-      }
-      onMouseLeave={(e) =>
-        (e.currentTarget.style.transform = "translateY(0)")
-      }
+      onMouseEnter={(e) => {
+        e.currentTarget.style.transform = "translateY(-8px)";
+      }}
+      onMouseLeave={(e) => {
+        e.currentTarget.style.transform = "translateY(0)";
+      }}
     >
       {/* Image */}
-      <div style={{ position: "relative" }}>
+      <div style={{ position: "relative", overflow: "hidden" }}>
         <img
           src={product.image}
           alt={product.name}
@@ -25,35 +25,50 @@ function ProductCard({ product, addToCart }) {
             width: "100%",
             height: "220px",
             objectFit: "cover",
+            transition: "0.4s",
           }}
+          onMouseEnter={(e) =>
+            (e.target.style.transform = "scale(1.1)")
+          }
+          onMouseLeave={(e) =>
+            (e.target.style.transform = "scale(1)")
+          }
         />
 
-        {/* Badge promo */}
+        {/* Badge */}
         <span
           style={{
             position: "absolute",
             top: "10px",
             left: "10px",
-            background: "#ff4d88",
+            background: "linear-gradient(45deg, #ff4d88, #ff99cc)",
             color: "#fff",
-            padding: "5px 10px",
+            padding: "6px 12px",
             borderRadius: "20px",
             fontSize: "12px",
+            fontWeight: "bold",
+            boxShadow: "0 4px 10px rgba(0,0,0,0.2)",
           }}
         >
-          NEW
+          🔥 NEW
         </span>
       </div>
 
       {/* Contenu */}
       <div style={{ padding: "15px" }}>
-        <h3 style={{ margin: "10px 0", color: "#333" }}>
+        <h3
+          style={{
+            margin: "10px 0",
+            color: "#333",
+            fontSize: "18px",
+          }}
+        >
           {product.name}
         </h3>
 
         <p
           style={{
-            fontSize: "20px",
+            fontSize: "22px",
             fontWeight: "bold",
             color: "#ff4d88",
           }}
@@ -64,10 +79,10 @@ function ProductCard({ product, addToCart }) {
         <button
           onClick={() => addToCart(product)}
           style={{
-            marginTop: "10px",
+            marginTop: "15px",
             width: "100%",
             padding: "12px",
-            borderRadius: "10px",
+            borderRadius: "12px",
             border: "none",
             background: "linear-gradient(45deg, #ff4d88, #ff99cc)",
             color: "#fff",
@@ -75,12 +90,15 @@ function ProductCard({ product, addToCart }) {
             cursor: "pointer",
             transition: "0.3s",
           }}
-          onMouseEnter={(e) =>
-            (e.target.style.opacity = "0.8")
-          }
-          onMouseLeave={(e) =>
-            (e.target.style.opacity = "1")
-          }
+          onMouseEnter={(e) => {
+            e.target.style.transform = "scale(1.05)";
+            e.target.style.boxShadow =
+              "0 5px 15px rgba(255, 77, 136, 0.5)";
+          }}
+          onMouseLeave={(e) => {
+            e.target.style.transform = "scale(1)";
+            e.target.style.boxShadow = "none";
+          }}
         >
           🛒 Ajouter au panier
         </button>

@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { Link } from "react-router-dom";
 
 function Navbar({ cartCount }) {
   const [showMenu, setShowMenu] = useState(false);
@@ -19,9 +20,9 @@ function Navbar({ cartCount }) {
       }}
     >
       {/* Logo */}
-      <h2 style={{ cursor: "pointer" }}>
-        🛍️ MonShop
-      </h2>
+      <Link to="/" style={{ textDecoration: "none", color: "#fff" }}>
+        <h2>🛍️ MonShop</h2>
+      </Link>
 
       {/* Barre de recherche */}
       <div
@@ -70,22 +71,19 @@ function Navbar({ cartCount }) {
 
           {/* Menu déroulant */}
           {showMenu && (
-            <div
-              style={{
-                position: "absolute",
-                top: "40px",
-                right: 0,
-                background: "#fff",
-                color: "#333",
-                borderRadius: "10px",
-                boxShadow: "0 5px 15px rgba(0,0,0,0.2)",
-                padding: "10px",
-                width: "150px",
-              }}
-            >
-              <p style={menuItem}>Se connecter</p>
-              <p style={menuItem}>S'inscrire</p>
-              <p style={menuItem}>Mon profil</p>
+            <div style={dropdownStyle}>
+              <Link to="/login" style={menuItem} onClick={() => setShowMenu(false)}>
+                Se connecter
+              </Link>
+
+              <Link to="/register" style={menuItem} onClick={() => setShowMenu(false)}>
+                S'inscrire
+              </Link>
+
+              <Link to="/profile" style={menuItem} onClick={() => setShowMenu(false)}>
+                Mon profil
+              </Link>
+
               <p style={menuItem}>Déconnexion</p>
             </div>
           )}
@@ -95,21 +93,7 @@ function Navbar({ cartCount }) {
         <div style={{ position: "relative" }}>
           <div style={iconStyle}>🛒</div>
 
-          <span
-            style={{
-              position: "absolute",
-              top: "-8px",
-              right: "-10px",
-              background: "#fff",
-              color: "#ff4d88",
-              borderRadius: "50%",
-              padding: "5px 8px",
-              fontSize: "12px",
-              fontWeight: "bold",
-            }}
-          >
-            {cartCount}
-          </span>
+          <span style={badgeStyle}>{cartCount}</span>
         </div>
       </div>
     </nav>
@@ -117,6 +101,7 @@ function Navbar({ cartCount }) {
 }
 
 /* Styles */
+
 const iconStyle = {
   cursor: "pointer",
   padding: "8px 12px",
@@ -124,9 +109,36 @@ const iconStyle = {
   transition: "0.3s",
 };
 
+const dropdownStyle = {
+  position: "absolute",
+  top: "45px",
+  right: 0,
+  background: "#fff",
+  color: "#333",
+  borderRadius: "10px",
+  boxShadow: "0 5px 15px rgba(0,0,0,0.2)",
+  width: "160px",
+  display: "flex",
+  flexDirection: "column",
+};
+
 const menuItem = {
-  padding: "8px",
+  padding: "10px",
+  textDecoration: "none",
+  color: "#333",
   cursor: "pointer",
+};
+
+const badgeStyle = {
+  position: "absolute",
+  top: "-8px",
+  right: "-10px",
+  background: "#fff",
+  color: "#ff4d88",
+  borderRadius: "50%",
+  padding: "5px 8px",
+  fontSize: "12px",
+  fontWeight: "bold",
 };
 
 export default Navbar;
